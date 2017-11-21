@@ -5,7 +5,6 @@ import dash_html_components as html
 
 import mltools
 from mltools import FightClassifier,Transformer,CustomScaler
-import importlib; importlib.reload(mltools)
 
 
 attributeList = ['wins','losses','dob','stance','height','weight','reach']
