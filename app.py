@@ -6,6 +6,14 @@ import dash_html_components as html
 import mltools
 from mltools import FightClassifier,Transformer,CustomScaler
 
+app = dash.Dash()
+
+app.suppress_callback_exceptions=True
+app.config.update(
+    {'routes_pathname_prefix':'',
+     'requests_pathname_prefix':''})
+server = app.server
+
 
 attributeList = ['wins','losses','dob','stance','height','weight','reach']
 
@@ -49,7 +57,6 @@ def generate_stats_table(fighter):
     return tableContent
 
 
-app = dash.Dash()
 
 layout = html.Div([
     html.Div([
