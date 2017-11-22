@@ -120,30 +120,6 @@ def build_matchup(fighter1,fighter2):
 
     return X
 
-def sql_to_list(tableName,cur):
-
-    pragmaExpr = 'PRAGMA table_info( %s )'%tableName
-    
-    cur.execute(pragmaExpr)
-
-    columnData = cur.fetchall()
-
-    columnNames = [t[1] for t in columnData]
-
-    selectExpr = 'SELECT * FROM %s'%tableName
-    cur.execute(selectExpr)
-
-    tableData = cur.fetchall()
-
-    dataList = []
-    
-    for entry in tableData:
-        currentFight = {name:entry[i] for i,name in enumerate(columnNames)}
-                
-        dataList.append(currentFight)
-
-    return dataList
-
 def get_fighters(dbfile='fighterdb.sqlite'):
 
     conn = sqlite3.connect(dbfile)
@@ -253,7 +229,7 @@ def train_classifier(loadData=True):
 
     else:
         import build_dataset
-        X,y = build_datasete.build_features(classifier.fighters)
+        X,y = build_datasets.build_features(classifier.fighters)
         X.to_csv('matchup_train.csv',header=True)
         pd.Series(y).to_csv('outcome_train.csv',header=True)
     

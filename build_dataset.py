@@ -1,3 +1,28 @@
+def sql_to_list(tableName,cur):
+
+    pragmaExpr = 'PRAGMA table_info( %s )'%tableName
+    
+    cur.execute(pragmaExpr)
+
+    columnData = cur.fetchall()
+
+    columnNames = [t[1] for t in columnData]
+
+    selectExpr = 'SELECT * FROM %s'%tableName
+    cur.execute(selectExpr)
+
+    tableData = cur.fetchall()
+
+    dataList = []
+    
+    for entry in tableData:
+        currentFight = {name:entry[i] for i,name in enumerate(columnNames)}
+                
+        dataList.append(currentFight)
+
+    return dataList
+
+
 def build_features(fighters):
 
     fights = []
