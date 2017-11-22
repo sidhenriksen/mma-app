@@ -14,6 +14,13 @@ app.config.update(
      'requests_pathname_prefix':''})
 server = app.server
 
+app.css.append_css({
+   'external_url': (
+       'app-style.css'
+   )
+})
+
+
 
 attributeList = ['wins','losses','dob','stance','height','weight','reach']
 
@@ -25,6 +32,7 @@ def generate_stats_table(fighter):
 
     fighter = mltools.strip_name(fighter)
     stats=classifier.fighters[fighter]
+    units = {'height':'cm','weight':'kg','reach':'cm'}
     stringFormat = {}
     for key in attributeList:
         if key not in ['wins','losses','cumtime','dob','stance']:
@@ -32,7 +40,8 @@ def generate_stats_table(fighter):
         elif key in ['wins','losses','cumtime']:
             sf = r'%i'
         else:
-            sf = r'%s'
+            unit = units[key] if key in units else ''
+            sf = r'%s'+unit
 
         stringFormat[key] = sf
                         

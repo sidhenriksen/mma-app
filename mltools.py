@@ -27,9 +27,8 @@ class CustomScaler(StandardScaler):
 
 class Transformer:
 
-    def __init__(self):
-
-        pass
+    def __init__(self,polynomialFeatures=True):
+        self.polynomialFeatures = polynomialFeatures
 
     def fit_transform(self,XTrain):
         myRange = np.arange(XTrain.shape[0])
@@ -42,9 +41,10 @@ class Transformer:
         
         XTrain = pd.DataFrame(self.scaler.transform(XTrain),
                                   columns=XTrain.columns)
-        
 
-        XTrain = polynomial_features(XTrain)
+        
+        if self.polynomialFeatures:
+            XTrain = polynomial_features(XTrain)
         
         return XTrain
 
@@ -52,8 +52,9 @@ class Transformer:
 
         XTest =  pd.DataFrame(self.scaler.transform(XTest),
                                   columns=XTest.columns)
-        
-        XTest = polynomial_features(XTest)
+
+        if self.polynomialFeatures:
+            XTest = polynomial_features(XTest)
 
         return XTest
     
@@ -219,7 +220,7 @@ def polynomial_features(X):
 
     
 
-def train_classifier(loadData=True):
+def train_classifier(loadData=True,polynomialFeatures=True):
 
     classifier = FightClassifier()
     
@@ -232,8 +233,9 @@ def train_classifier(loadData=True):
         X,y = build_datasets.build_features(classifier.fighters)
         X.to_csv('matchup_train.csv',header=True)
         pd.Series(y).to_csv('outcome_train.csv',header=True)
-    
-    classifier.transformer = Transformer()
+
+        
+    classifier.transformer = Transformer(polynomialFeatures)
     
     X = classifier.transformer.fit_transform(X)
 
