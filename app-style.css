@@ -1,3 +1,13 @@
 ._dash-undo-redo {
   display: none;
 }
+
+font-size: 16px;
+
+p {
+    font-size: 16px;
+}
+
+table {
+    font-size: 14px;
+}

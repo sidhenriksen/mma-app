@@ -7,9 +7,6 @@ from sklearn.linear_model import LogisticRegression,LinearRegression
 from sklearn.preprocessing import StandardScaler
 
 
-    
-    
-
 class CustomScaler(StandardScaler):
 
     def fit(self,X):
@@ -145,11 +142,11 @@ def strip_name(name):
     newName = name.lower().replace(' ','').replace(',','').replace('.','').replace('-','')
     return newName
 
-class FightClassifier(LogisticRegression):
+class FightClassifier(RandomForestClassifier):
 
     def __init__(self,transformer=None):
         
-        LogisticRegression.__init__(self)
+        super().__init__()
         self.displayDict = {}
         self.transformer = transformer
 

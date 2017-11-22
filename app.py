@@ -21,7 +21,6 @@ app.css.append_css({
 })
 
 
-
 attributeList = ['wins','losses','dob','stance','height','weight','reach']
 
 with open('classifier.save','rb') as f:
@@ -76,7 +75,7 @@ layout = html.Div([
                              options = [{'label':classifier.fighters[k]['name'],
                                          'value': k} for k in fighterList],
                              value='georgesstpierre'),
-            html.Img(width=100,id='pic-f1'),
+            html.Img(width=150,id='pic-f1'),
             html.Table(id='stats-table-1')
         ],style={'border':'1px solid black;'}),
         
@@ -88,7 +87,7 @@ layout = html.Div([
                                          'value': k} for k in fighterList],
                              value='michaelbisping'),
                          
-            html.Img(width=100,id='pic-f2'),
+            html.Img(width=150,id='pic-f2'),
             html.Table(id='stats-table-2')
         ])
 
