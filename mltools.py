@@ -326,16 +326,19 @@ def get_fights(fighter,dbfile='fighterdb.sqlite'):
     return fights
     
 
-def train_classifier():
+def train_classifier(loadData=True):
 
-    
-    #X = pd.read_csv('matchup_train.csv',header=0,index_col=0)
-    #y = pd.read_csv('outcome_train.csv',header=0,index_col=0).iloc[:,0]
 
     classifier = FightClassifier()
-    X,y = build_features(classifier.fighters)
-    X.to_csv('matchup_train.csv',header=True)
-    pd.Series(y).to_csv('outcome_train.csv',header=True)
+    
+    if loadData:
+        X = pd.read_csv('matchup_train.csv',header=0,index_col=0)
+        y = pd.read_csv('outcome_train.csv',header=0,index_col=0).iloc[:,0]
+
+    else:
+        X,y = build_features(classifier.fighters)
+        X.to_csv('matchup_train.csv',header=True)
+        pd.Series(y).to_csv('outcome_train.csv',header=True)
     
     classifier.transformer = Transformer()
     
