@@ -146,7 +146,7 @@ class FightClassifier(RandomForestClassifier):
 
     def __init__(self,transformer=None):
         
-        super().__init__()
+        super().__init__(max_depth=6,n_estimators=50)
         self.displayDict = {}
         self.transformer = transformer
 
