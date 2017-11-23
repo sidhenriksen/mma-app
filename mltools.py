@@ -163,8 +163,6 @@ class FightClassifier:
 
         self.data_repair()
 
-    def
-
     def predict_fight(self,fighter1,fighter2):
 
         f1 = strip_name(fighter1)
@@ -234,7 +232,8 @@ def polynomial_features(X):
 
 def train_classifier(loadData=True,polynomialFeatures=True):
 
-    classifier = FightClassifier()
+    
+    classifier = FightClassifier(classifier=RandomForestClassifier(max_depth=6,n_estimators=50))
     
     if loadData:
         X = pd.read_csv('matchup_train.csv',header=0,index_col=0)
