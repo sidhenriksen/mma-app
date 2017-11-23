@@ -6,6 +6,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression,LinearRegression
 from sklearn.preprocessing import StandardScaler
 
+from xgboost import XGBClassifier
 
 class CustomScaler(StandardScaler):
 
@@ -233,7 +234,7 @@ def polynomial_features(X):
 def train_classifier(loadData=True,polynomialFeatures=True):
 
     
-    classifier = FightClassifier(classifier=RandomForestClassifier(max_depth=6,n_estimators=50))
+    classifier = FightClassifier(classifier=XGBClassifier())
     
     if loadData:
         X = pd.read_csv('matchup_train.csv',header=0,index_col=0)
