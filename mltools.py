@@ -246,12 +246,12 @@ def train_classifier(loadData=True,polynomialFeatures=True):
         pd.Series(y).to_csv('outcome_train.csv',header=True)
 
         
-    classifier.transformer = Transformer(polynomialFeatures)
+    #classifier.transformer = Transformer(polynomialFeatures)
     
-    X = classifier.transformer.fit_transform(X)
+    #X = classifier.transformer.fit_transform(X)
 
     classifier.fit(X,y)
-
+    
     return classifier
 
 
@@ -368,7 +368,10 @@ def get_fights(fighter,dbfile='fighterdb.sqlite'):
 if __name__ == "__main__":
 
     classifier = train_classifier()
+    rfc = classifier.classifier
+
+    comps = {'classifier':classifier.classifier}
 
     with open('classifier.save','wb') as f:
-        pickle.dump(classifier,f)
+        pickle.dump(comps,f)
         

@@ -24,7 +24,9 @@ app.css.append_css({
 attributeList = ['wins','losses','dob','stance','height','weight','reach']
 
 with open('classifier.save','rb') as f:
-    classifier = pickle.load(f)
+    comps = pickle.load(f)
+
+classifier = FightClassifier(classifier=comps['classifier'])
 
 #classifier = mltools.train_classifier()
 
