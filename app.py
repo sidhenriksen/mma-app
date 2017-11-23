@@ -6,14 +6,27 @@ import dash_html_components as html
 import mltools
 from mltools import FightClassifier,Transformer,CustomScaler
 
+
+print('--- Loading pickle ---')
+with open('classifier.save','rb') as f:
+    comps = pickle.load(f)
+print('--- Done ---')
+
+print('--- Building classifier ---')
+classifier = FightClassifier(classifier=comps['classifier'])
+print('--- Done ---')
+
+print('--- Starting app ---')
 app = dash.Dash()
 
+print('--- Setting config ---')
 app.suppress_callback_exceptions=True
 app.config.update(
     {'routes_pathname_prefix':'',
      'requests_pathname_prefix':''})
 server = app.server
 
+print('--- Appending CSS ---')
 app.css.append_css({
    'external_url': (
        'app-style.css'
@@ -23,13 +36,10 @@ app.css.append_css({
 
 attributeList = ['wins','losses','dob','stance','height','weight','reach']
 
-with open('classifier.save','rb') as f:
-    comps = pickle.load(f)
-
-classifier = FightClassifier(classifier=comps['classifier'])
 
 #classifier = mltools.train_classifier()
 
+print('--- Running rest ---')
 fighterList = np.sort(list(classifier.fighters.keys()))
 def generate_stats_table(fighter):
 
