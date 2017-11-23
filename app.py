@@ -26,6 +26,8 @@ attributeList = ['wins','losses','dob','stance','height','weight','reach']
 with open('classifier.save','rb') as f:
     classifier = pickle.load(f)
 
+#classifier = mltools.train_classifier()
+
 fighterList = np.sort(list(classifier.fighters.keys()))
 def generate_stats_table(fighter):
 

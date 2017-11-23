@@ -142,11 +142,11 @@ def strip_name(name):
     newName = name.lower().replace(' ','').replace(',','').replace('.','').replace('-','')
     return newName
 
-class FightClassifier(RandomForestClassifier):
+class FightClassifier:
 
-    def __init__(self,transformer=None):
-        
-        super().__init__(max_depth=6,n_estimators=50)
+    def __init__(self,classifier,transformer=None):
+
+        self.classifier = classifier
         self.displayDict = {}
         self.transformer = transformer
 
@@ -163,6 +163,7 @@ class FightClassifier(RandomForestClassifier):
 
         self.data_repair()
 
+    def
 
     def predict_fight(self,fighter1,fighter2):
 
@@ -197,6 +198,20 @@ class FightClassifier(RandomForestClassifier):
             if self.fighters[f]['reach'] == 0.0:
                 self.fighters[f]['reach'] = \
                   self.reachRegressor.predict(self.fighters[f]['height'])
+
+    def fit(self,X,y):
+        
+        self.classifier.fit(X,y)
+        
+        return self
+    
+    def predict(self,X):
+
+        return self.classifier.predict(X)
+
+    def predict_proba(self,X):
+
+        return self.classifier.predict_proba(X)
 
 
 def polynomial_features(X):
